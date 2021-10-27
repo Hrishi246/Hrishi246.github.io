@@ -18,18 +18,61 @@
 
     <script type="text/javascript">
       var vlSpec ={
-		  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-		  "data": {"url": "building_inventory.csv"},
-		  "mark": "bar",
-		  "transform" : [{"filter": {"field": "Congress Dist", "gt": 0}}],
-		  "encoding": {
-			"x": {"field": "Congress Dist", "type": "quantitative", "bin":true},
-			"y": {"field": "Square Footage", "type": "quantitative", "aggregate" : "sum"}
-		  }
-		};
+					  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+					  "data": {"url": "building_inventory.csv"},
+					  "vconcat": [
+						{
+						  "mark": {"type": "circle", "clip": true},
+						  "selection": {"clickanddrag": {"type": "interval", "encodings": ["y"]}},
+						  "transform": [
+							{"filter": {"field": "Year Acquired", "gt": 1990}},
+							{"filter": {"field": "Congress Dist", "gt": 0}}
+						  ],
+						  "encoding": {
+							"x": {
+							  "field": "Year Acquired",
+							  "type": "quantitative",
+							  "scale": {"domain": [1990, 2019]}
+							},
+							"y": {"field": "Square Footage", "type": "quantitative"},
+							"tooltip": [
+							  {"field": "County", "type": "nominal"},
+							  {"field": "City", "type": "nominal"}
+							],
+							"opacity": {"condition": {"selection": "clickanddrag"}, "value": 0.2}
+						  }
+						},
+						{
+						  "layer": [
+							{
+							  "mark": "bar",
+							  "transform": [{"filter": {"field": "Year Acquired", "gt": 1990}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
+							  "encoding": {
+								"x": {"field": "Congress Dist", "type": "ordinal"},
+								"y": {"aggregate": "count", "type": "quantitative"},
+								"opacity": {"value": 0.2}
+							  }
+							},
+							{
+							  "mark": "bar",
+							  "transform": [{"filter": {"selection": "clickanddrag"}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
+							  "encoding": {
+								"x": {"field": "Congress Dist", "type": "ordinal"},
+								"y": {"aggregate": "count", "type": "quantitative"}
+							  }
+							}
+						  ]
+						}
+					  ]
+					};
 	  //var embed = {};
 	  document.getElementById("render").addEventListener("click", (event) => 
 			   {var embed = vegaEmbed("#vis", vlSpec).then(result => console.log(result)).catch(console.warn);});
+			   
+	  document.getElementById("random_del").addEventListener("click", (event) => { var cs = embed.view.changeset()
+	                                       .remove((d) => {console.log(d);});
+      embed.view.change("source_0", cs).run();
+})
 
     </script>
   </body>
