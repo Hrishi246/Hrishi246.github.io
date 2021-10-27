@@ -27,8 +27,9 @@
 			"y": {"field": "Square Footage", "type": "quantitative", "aggregate" : "sum"}
 		  }
 		};
+	  mutable embed = {};
 	  document.getElementById("render").addEventListener("click", (event) => 
-			   {mutable embed = vegaEmbed("#viz", vlSpec);});
+			   {embed = vegaEmbed("#viz", vlSpec);});
 
     </script>
   </body>
