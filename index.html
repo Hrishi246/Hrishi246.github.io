@@ -27,9 +27,9 @@
 			"y": {"field": "Square Footage", "type": "quantitative", "aggregate" : "sum"}
 		  }
 		};
-	  var embed = {};
+	  //var embed = {};
 	  document.getElementById("render").addEventListener("click", (event) => 
-			   {embed = vegaEmbed("#vis", vlSpec).then(result => console.log(result)).catch(console.warn);});
+			   {var embed = vegaEmbed("#vis", vlSpec).then(result => console.log(result)).catch(console.warn);});
 
     </script>
   </body>
