@@ -8,9 +8,16 @@
   </head>
   <body>
     <div id="vis"></div>
+	<div>
+	  <button id="render">Render</button>
+	  <button id="random_add">Random Add</button>
+	  <button id="random_del">Random Del</button>
+	  <button id="scale">Scale x10</button>
+	  <button id="circle">Change to Circle</button>
+	</div>
 
     <script type="text/javascript">
-      var yourVlSpec ={
+      var vlSpec ={
 		  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
 		  "data": {"url": "building_inventory.csv"},
 		  "mark": "bar",
@@ -20,7 +27,11 @@
 			"y": {"field": "Square Footage", "type": "quantitative", "aggregate" : "sum"}
 		  }
 		};
-      vegaEmbed('#vis', yourVlSpec);
+      vegaEmbed('#vis', vlSpec);
+	  mutable embed = {}
+	  document.getElementById("render").addEventListener("click", (event) => 
+			   {mutable embed = vegaembed("#viz", vlSpec);})
+
     </script>
   </body>
 </html>
