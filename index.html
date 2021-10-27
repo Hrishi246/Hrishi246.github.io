@@ -30,6 +30,7 @@
 		
 	  document.getElementById("render").addEventListener("click", (event) => 
 			   {mutable embed = vegaembed("#viz", vlSpec);})
+	  embed.view.change( "source_0", embed.view.changeset().encode((t) => {console.log(t);})).run()
 
     </script>
   </body>
