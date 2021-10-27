@@ -18,7 +18,7 @@
 
     <script type="text/javascript">
       var vlSpec ={
-		  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+		  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 		  "data": {"url": "building_inventory.csv"},
 		  "mark": "bar",
 		  "transform" : [{"filter": {"field": "Congress Dist", "gt": 0}}],
@@ -27,10 +27,8 @@
 			"y": {"field": "Square Footage", "type": "quantitative", "aggregate" : "sum"}
 		  }
 		};
-	  mutable embed = {};
-	  vegaembed = require("vega-embed@6");	  
 	  document.getElementById("render").addEventListener("click", (event) => 
-			   {mutable embed = vegaembed("#viz", vlSpec);});
+			   {mutable embed = vegaEmbed("#viz", vlSpec);});
 
     </script>
   </body>
