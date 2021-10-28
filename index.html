@@ -65,7 +65,7 @@
 						}
 					  ]
 					};
-	  //var embed = {};
+	  mutable embed = {};
 	  document.getElementById("render").addEventListener("click", (event) => 
 			   {var embed = vegaEmbed("#vis", vlSpec).then(result => console.log(result)).catch(console.warn);});
 			   
