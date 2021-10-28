@@ -22,52 +22,26 @@
 					  "width": 600,
 					  "autosize": {"type": "fit", "contains": "padding"},
 					  "data": {"url": "building_inventory.csv"},
-					  "vconcat": [
-						{
-						  "mark": {"type": "circle", "clip": true},
-						  "selection": {"clickanddrag": {"type": "interval", "encodings": ["y"]}},
-						  "transform": [
-							{"filter": {"field": "Year Acquired", "gt": 1990}},
-							{"filter": {"field": "Congress Dist", "gt": 0}}
-						  ],
-						  "encoding": {
-							"x": {
-							  "field": "Year Acquired",
-							  "type": "quantitative",
-							  "scale": {"domain": [1990, 2019]}
-							},
-							"y": {"field": "Square Footage", "type": "quantitative"},
-							"tooltip": [
-							  {"field": "County", "type": "nominal"},
-							  {"field": "City", "type": "nominal"}
-							],
-							"opacity": {"condition": {"selection": "clickanddrag"}, "value": 0.2}
-						  }
+					  "mark": {"type": "circle", "clip": true},
+					  "selection": {"clickanddrag": {"type": "interval", "encodings": ["y"]}},
+					  "transform": [
+						{"filter": {"field": "Year Acquired", "gt": 1990}},
+						{"filter": {"field": "Congress Dist", "gt": 0}}
+					  ],
+					  "encoding": {
+						"x": {
+						  "field": "Year Acquired",
+						  "type": "quantitative",
+						  "scale": {"domain": [1990, 2019]}
 						},
-						{
-						  "layer": [
-							{
-							  "mark": "bar",
-							  "transform": [{"filter": {"field": "Year Acquired", "gt": 1990}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
-							  "encoding": {
-								"x": {"field": "Congress Dist", "type": "ordinal"},
-								"y": {"aggregate": "count", "type": "quantitative"},
-								"opacity": {"value": 0.2}
-							  }
-							},
-							{
-							  "mark": "bar",
-							  "transform": [{"filter": {"selection": "clickanddrag"}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
-							  "encoding": {
-								"x": {"field": "Congress Dist", "type": "ordinal"},
-								"y": {"aggregate": "count", "type": "quantitative"}
-							  }
-							}
-						  ]
-						}
-					  ]
-					};
-					
+						"y": {"field": "Square Footage", "type": "quantitative"},
+						"tooltip": [
+						  {"field": "County", "type": "nominal"},
+						  {"field": "City", "type": "nominal"}
+						],
+						"opacity": {"condition": {"selection": "clickanddrag"}, "value": 0.2}
+					  }
+				  };	
 	  var embed = {};
 	  document.getElementById("render").addEventListener("click", (event) => {embed = vegaEmbed("#vis", vlSpec)});   
 	  document.getElementById("random_del").addEventListener("click", (event) => { var cs = embed.view.changeset().remove((d) => {return d;});
@@ -77,3 +51,4 @@
     </script>
   </body>
 </html>
+``````````
