@@ -24,10 +24,10 @@
 					  "autosize": {"type": "fit", "contains": "padding"},
 					  "data": {"url": "building_inventory.csv"},
 					  "hconcat": [
-					   "title": "Square Footage vs Year Acquired",
 						{
-					  "width": 400,
-					  "height":400,
+					      "width": 400,
+					      "height":400,
+					  	  "title": "Square Footage vs Year Acquired",
 						  "mark": {"type": "circle", "clip": true, "color":"darkgreen"},
 						  "selection": {"clickanddrag": {"type": "interval", "encodings": ["y"]}},
 						  "transform": [
@@ -52,9 +52,10 @@
 					  "width": 400,
 					  "height":400,
 						  "layer": [
-						  "title": "Count of records of Congress District",
+						  
 							{
-									"mark": {"type": "bar", "color":"lightred"},
+							  "title": "Count of records of Congress District",
+							  "mark": {"type": "bar", "color":"lightred"},
 							  "transform": [{"filter": {"field": "Year Acquired", "gt": 1990}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
 							  "encoding": {
 								"x": {"field": "Congress Dist", "type": "ordinal"},
@@ -63,7 +64,7 @@
 							  }
 							},
 							{
-											 "mark": {"type": "bar", "color":"darkred"},
+							  "mark": {"type": "bar", "color":"darkred"},
 							  "transform": [{"filter": {"selection": "clickanddrag"}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
 							  "encoding": {
 								"x": {"field": "Congress Dist", "type": "ordinal"},
