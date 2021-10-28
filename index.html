@@ -19,29 +19,57 @@
     <script type="text/javascript">
       var vlSpec ={
 					  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-					  "width": 600,
 					  "autosize": {"type": "fit", "contains": "padding"},
 					  "data": {"url": "building_inventory.csv"},
-					  "mark": {"type": "circle", "clip": true},
-					  "selection": {"clickanddrag": {"type": "interval", "encodings": ["y"]}},
-					  "transform": [
-						{"filter": {"field": "Year Acquired", "gt": 1990}},
-						{"filter": {"field": "Congress Dist", "gt": 0}}
-					  ],
-					  "encoding": {
-						"x": {
-						  "field": "Year Acquired",
-						  "type": "quantitative",
-						  "scale": {"domain": [1990, 2019]}
+					  "hconcat": [
+						{
+					  "width": 400,
+					  "height":400,
+						  "mark": {"type": "circle", "clip": true, "color":"darkgreen"},
+						  "selection": {"clickanddrag": {"type": "interval", "encodings": ["y"]}},
+						  "transform": [
+							{"filter": {"field": "Year Acquired", "gt": 1990}},
+							{"filter": {"field": "Congress Dist", "gt": 0}}
+						  ],
+						  "encoding": {
+							"x": {
+							  "field": "Year Acquired",
+							  "type": "quantitative",
+							  "scale": {"domain": [1990, 2019]}
+							},
+							"y": {"field": "Square Footage", "type": "quantitative"},
+							"tooltip": [
+							  {"field": "County", "type": "nominal"},
+							  {"field": "City", "type": "nominal"}
+							],
+							"opacity": {"condition": {"selection": "clickanddrag"}, "value": 0.2}
+						  }
 						},
-						"y": {"field": "Square Footage", "type": "quantitative"},
-						"tooltip": [
-						  {"field": "County", "type": "nominal"},
-						  {"field": "City", "type": "nominal"}
-						],
-						"opacity": {"condition": {"selection": "clickanddrag"}, "value": 0.2}
-					  }
-				  };	
+						{
+					  "width": 400,
+					  "height":400,
+						  "layer": [
+							{
+									"mark": {"type": "bar", "color":"lightred"},
+							  "transform": [{"filter": {"field": "Year Acquired", "gt": 1990}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
+							  "encoding": {
+								"x": {"field": "Congress Dist", "type": "ordinal"},
+								"y": {"aggregate": "count", "type": "quantitative"},
+								"opacity": {"value": 0.2}
+							  }
+							},
+							{
+											 "mark": {"type": "bar", "color":"darkred"},
+							  "transform": [{"filter": {"selection": "clickanddrag"}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
+							  "encoding": {
+								"x": {"field": "Congress Dist", "type": "ordinal"},
+								"y": {"aggregate": "count", "type": "quantitative"}
+							  }
+							}
+						  ]
+						}
+					  ]
+					};	
 	  var embed = {};
 	  document.getElementById("render").addEventListener("click", (event) => {embed = vegaEmbed("#vis", vlSpec)});   
 	  document.getElementById("random_del").addEventListener("click", (event) => { var cs = embed.view.changeset().remove((d) => {return d;});
@@ -51,4 +79,3 @@
     </script>
   </body>
 </html>
-``````````
