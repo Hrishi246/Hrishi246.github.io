@@ -69,8 +69,7 @@
 	  var embed = {};
 	  document.getElementById("render").addEventListener("click", (event) => {embed = vegaEmbed("#vis", vlSpec)});
 			   
-	  document.getElementById("random_del").addEventListener("click", (event) => { var cs = embed.view.changeset()
-	                                       .remove((d) => {console.log(d);});
+	  document.getElementById("random_del").addEventListener("click", (event) => { var cs = embed.view.changeset().remove((d) => {return d;});
       embed.view.change("source_0", cs).run();
 })
 
