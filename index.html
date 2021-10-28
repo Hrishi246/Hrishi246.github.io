@@ -9,8 +9,6 @@
   <body>
     <h1 style="text-align:center;">Assignment 3</h1>
     <h2 style="color:black;text-align:center">Interactive visualziation using vega-lite</h2>
-	<p style="color:black;padding:150px;">Square Footage VS. Year Acquired</p>
-	<p style="color:black;padding:550px;">Count of records of Congress Districts</p>
     <div id="vis"></div>
 	<div>
 	  <button id="render">Render</button>
@@ -26,6 +24,7 @@
 					  "autosize": {"type": "fit", "contains": "padding"},
 					  "data": {"url": "building_inventory.csv"},
 					  "hconcat": [
+					   "title": "Square Footage vs Year Acquired",
 						{
 					  "width": 400,
 					  "height":400,
@@ -53,6 +52,7 @@
 					  "width": 400,
 					  "height":400,
 						  "layer": [
+						  "title": "Count of records of Congress District",
 							{
 									"mark": {"type": "bar", "color":"lightred"},
 							  "transform": [{"filter": {"field": "Year Acquired", "gt": 1990}}, {"filter": {"field": "Congress Dist", "gt": "0"}}],
