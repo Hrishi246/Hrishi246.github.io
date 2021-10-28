@@ -65,9 +65,9 @@
 						}
 					  ]
 					};
-	  mutable embed = {};
-	  document.getElementById("render").addEventListener("click", (event) => 
-			   {var embed = vegaEmbed("#vis", vlSpec).then(result => console.log(result)).catch(console.warn);});
+					
+	  var embed = {};
+	  document.getElementById("render").addEventListener("click", (event) => {embed = vegaEmbed("#vis", vlSpec)});
 			   
 	  document.getElementById("random_del").addEventListener("click", (event) => { var cs = embed.view.changeset()
 	                                       .remove((d) => {console.log(d);});
